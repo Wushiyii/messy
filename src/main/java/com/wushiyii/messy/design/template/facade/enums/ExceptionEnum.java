@@ -13,6 +13,9 @@ public enum ExceptionEnum {
     UNKNOWN("未知"),
 
     E10000("系统繁忙，请稍后重试"),
+
+
+    V10000("未传输operator"),
     ;
 
 

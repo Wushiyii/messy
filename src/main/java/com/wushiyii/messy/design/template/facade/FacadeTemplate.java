@@ -30,12 +30,6 @@ public abstract class FacadeTemplate <T extends BaseReqDto, R extends BaseRespDt
         this.clazz = checkNotNull(clazz);
     }
 
-    protected FacadeTemplate(T req, Class<R> clazz) {
-        this.templateName = StringUtils.EMPTY;
-        this.req = checkNotNull(req);
-        this.clazz = checkNotNull(clazz);
-    }
-
     //基本参数校验
     protected void checkParams(T req) {
         if (req == null) {
