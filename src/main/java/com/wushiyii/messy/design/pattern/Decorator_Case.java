@@ -1,5 +1,7 @@
 package com.wushiyii.messy.design.pattern;
 
+import java.io.*;
+
 public class Decorator_Case {
 
     public interface Component{
@@ -54,11 +56,25 @@ public class Decorator_Case {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Decorator a = new DecoratorA(new ConcreteDecorator());
         Decorator b = new DecoratorB(new ConcreteDecorator());
 
         a.fun();
         b.fun();
+
+        //DataInputStream、BufferedInputStream、PushBackInputStream等等流都为IO装饰者模式
+
+//        DataInputStream ds = new DataInputStream(new FileInputStream(new File("/Users/qudian/Desktop/test.txt")));
+//        int available = ds.available();
+//        byte[] stream = new byte[available];
+//        ds.read(stream);
+//        System.out.println(new String(stream));
+
+
+        BufferedInputStream bf = new BufferedInputStream(new FileInputStream(new File("/Users/qudian/Desktop/test.txt")));
+        byte[] buf = new byte[bf.available()];
+        bf.read(buf);
+        System.out.println(new String(buf));
     }
 }
