@@ -41,10 +41,34 @@ public class OperateStreamDemo {
        System.out.println(sum);
    }
 
+    /**
+     * filter过滤操作
+     */
+   private void filterDemo() {
+       //过滤偶数并打印
+       Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+       Integer[] integers = integerStream.filter(x -> x % 2 == 0).toArray(Integer[]::new);
+       System.out.println(Arrays.toString(integers));
+   }
+
+    /**
+     * foreach操作(foreach是consumer，操作后流会被消费，不可再使用；如需要重复使用，可以使用peek)
+     */
+   private void foreachDemo() {
+       Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+       integerStream.forEach(System.out::println);
+
+       Stream.of("one", "two", "three", "four")
+               .peek(e -> System.out.println("Before value: " + e))
+               .map(String::toUpperCase)
+               .peek(e -> System.out.println("After value: " + e));
+
+
+   }
 
     public static void main(String[] args) {
         OperateStreamDemo demo = new OperateStreamDemo();
-        demo.flatMapDemo();
+        demo.foreachDemo();
     }
 
 
