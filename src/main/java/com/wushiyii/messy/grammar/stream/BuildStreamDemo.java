@@ -9,8 +9,10 @@ import java.util.stream.Stream;
 
 /**
  * @author who
+ * 参考：https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html
+ * 备注：以下所有stream为了简洁都进行重新赋值，实际上是不能运行通的
  */
-public class StreamDemo {
+public class BuildStreamDemo {
 
     /**
      * 创建普通流
@@ -56,8 +58,10 @@ public class StreamDemo {
 
 
 
+
+
     public static void main(String[] args) {
-        StreamDemo demo = new StreamDemo();
+        BuildStreamDemo demo = new BuildStreamDemo();
         demo.transferStream();
 
     }
