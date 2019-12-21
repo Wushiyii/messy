@@ -31,7 +31,9 @@ public class paragraph_one {
         final FileChannel outputChannel = fileOutputStream.getChannel();
         buffer.clear();
         for (int i = 0, len = bitmap.length; i < len; i++) {
-            if (bitmap[i] == 0x01) buffer.put((byte) i);
+            if (bitmap[i] == 0x01) {
+                buffer.put((byte) i);
+            }
         }
         buffer.flip();
         outputChannel.write(buffer);
