@@ -96,10 +96,33 @@ public class OperateStreamDemo {
        Integer min = stream3.reduce(1, Integer::min);
    }
 
+    /**
+     * limit 返回 Stream 的前面 n 个元素；
+     * skip 则是扔掉前 n 个元素（它是由一个叫 subStream 的方法改名而来）。
+     * 这两种操作都为short-circuiting
+     */
+   private void limitDemo() {
+       Stream<Integer> stream1 = Stream.of(1, 2, 3, 5, 7);
+       stream1.limit(2).forEach(System.out::println);
+
+       Stream<Integer> stream2 = Stream.of(1, 2, 3, 5, 7);
+       stream2.skip(3).forEach(System.out::println);
+   }
+
+    /**
+     * sorted排序操作
+     * 对 Stream 的排序通过 sorted 进行，它比数组的排序更强之处在于：
+     * 你可以首先对 Stream 进行各类 map、filter、limit、skip ，甚至 distinct 来减少元素数量后，再排序
+     * 这能帮助程序明显缩短执行时间。
+     */
+   private void sortedDemo() {
+       Stream<Integer> stream1 = Stream.of(5, 4, 2, 3, 1, 7);
+       stream1.sorted().forEach(System.out::println);
+   }
 
     public static void main(String[] args) {
         OperateStreamDemo demo = new OperateStreamDemo();
-        demo.reduceDemo();
+        demo.sortedDemo();
     }
 
 
