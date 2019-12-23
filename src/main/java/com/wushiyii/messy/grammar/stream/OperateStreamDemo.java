@@ -62,13 +62,44 @@ public class OperateStreamDemo {
                .peek(e -> System.out.println("Before value: " + e))
                .map(String::toUpperCase)
                .peek(e -> System.out.println("After value: " + e));
-
-
    }
+
+    /**
+     * findFirst操作是一个terminal兼short-circuiting操作
+     */
+   private void findFirstDemo() {
+       Stream<Integer> integerStream = Stream.of(1, 5, 7, 9, 10);
+       integerStream.findFirst().ifPresent(System.out::println);
+   }
+
+    /**
+     * 这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），
+     * 和前面 Stream 的第一个、第二个、第 n 个元素组合。<br/>
+     * 从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。<br/>
+     * 例如 Stream 的 sum 就相当于:<br/>
+     * <pre>
+     * {@code Integer sum = integers.reduce(0, (a, b) -> a+b);}
+     * // 或
+     * {@code Integer sum = integers.reduce(0, Integer::sum);}
+     * </pre>
+     * 也有没有起始值(identity)的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。<br/>
+     */
+   private void reduceDemo() {
+       //1.求和
+       Stream<Integer> stream1 = Stream.of(1, 2, 3, 5, 7);
+       Integer sum = stream1.reduce(0, Integer::sum);
+       //2.字符串连接
+       Stream<String> stream2 = Stream.of("Am ", "I ", "human ", "?");
+       String concatStr = stream2.reduce("", String::concat);
+       //3.求最小值
+       Stream<Integer> stream3 = Stream.of(-1, 2, 3, 5, 7);
+       Integer min = stream3.reduce(1, Integer::min);
+   }
+
 
     public static void main(String[] args) {
         OperateStreamDemo demo = new OperateStreamDemo();
-        demo.foreachDemo();
+        demo.reduceDemo();
     }
 
 
