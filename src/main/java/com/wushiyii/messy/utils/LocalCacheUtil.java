@@ -26,12 +26,7 @@ public class LocalCacheUtil {
     public static  <K,V> V getMinutesCache(K k) {
         Object val = null;
         try {
-            val = cache.get(k, new Callable<Object>() {
-                @Override
-                public Object call() throws Exception {
-                    return "";
-                }
-            });
+            val = cache.getIfPresent(k);
         } catch (Throwable t) {
             LogUtil.error(logger, t, "缓存异常");
         }
