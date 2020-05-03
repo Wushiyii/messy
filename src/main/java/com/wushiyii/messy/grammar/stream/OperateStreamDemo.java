@@ -37,8 +37,9 @@ public class OperateStreamDemo {
      * 多输入，单输出（把输入的底层元素全部抽出放在一起）
      */
    private void flatMapDemo() {
-       Stream<List<Integer>> multiStream = Stream.of(Arrays.asList(100, 200, 300), Arrays.asList(500, 600, 700), Arrays.asList(800, 900, 1000));
-       int sum = multiStream.flatMap(x -> x.stream()).mapToInt(x -> x).sum();
+//       Stream<List<Integer>> multiStream = Stream.of(Arrays.asList(100, 200, 300));
+       List<Integer> integerList = Arrays.asList(100, 200, 300);
+       int sum = integerList.stream().mapToInt(x -> x).sum();
        System.out.println(sum);
    }
 
@@ -164,7 +165,7 @@ public class OperateStreamDemo {
 
     public static void main(String[] args) {
         OperateStreamDemo demo = new OperateStreamDemo();
-        demo.matchDemo();
+        demo.flatMapDemo();
     }
 
 
