@@ -25,9 +25,41 @@ public class BasicPrimitiveType {
         System.out.println(i3 == i4);// false
     }
 
+    public static void stringCompare() {
+        String s1 = new StringBuilder("go").append("od").toString();
+        // System.initializeSystemClass会触发一部分字符串的初始化，导致intern返回的并不等于新建的
+        String s2 = new StringBuilder("1.8.0_").append("201").toString();
+        System.out.println(s1.intern() == s1);
+        System.out.println(s2.intern() == s2);
+    }
+
+    public static void stringCompare2() {
+        String s1 = "helloWorld";
+        String s2 = new String("helloWorld");
+        String s3 = "hello";
+        String s4 = "World";
+        String s5 = "hello" + "World";
+        String s6 = s3 + s4;
+
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s2.intern());
+
+
+
+        System.out.println("s1:" + System.identityHashCode(s1));
+        System.out.println("s2:" + System.identityHashCode(s2));
+
+        System.out.println("s3:" + System.identityHashCode(s3));
+        System.out.println("s4:" + System.identityHashCode(s4));
+
+        System.out.println("s5:" + System.identityHashCode(s5));
+        System.out.println("s6:" + System.identityHashCode(s6));
+
+    }
+
 
 
     public static void main(String[] args) {
-        intCompare();
+        stringCompare2();
     }
 }
