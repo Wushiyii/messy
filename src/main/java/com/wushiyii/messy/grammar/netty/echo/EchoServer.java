@@ -7,6 +7,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpServerCodec;
 
 import java.net.InetSocketAddress;
 
@@ -24,6 +26,8 @@ public class EchoServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new HttpServerCodec());
+                            ch.pipeline().addLast(new HttpObjectAggregator(2048));
                             ch.pipeline().addLast(new EchoServerHandler());//添加指定Handler到channel中到pipeline里
                         }
                     });
