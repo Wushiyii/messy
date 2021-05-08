@@ -1,4 +1,4 @@
-package com.wushiyii.messy.grammar.netty.echo;
+package com.wushiyii.messy.netty.echo;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -6,20 +6,23 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
 
-@ChannelHandler.Sharable //Sharable标识此类可以在Channel中共享
-public class EchoClientHandler extends SimpleChannelInboundHandler {
+/**
+ * 客户端业务逻辑处理器
+ */
+@ChannelHandler.Sharable
+@Slf4j
+public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(Unpooled.copiedBuffer("What?", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("Hello~", CharsetUtil.UTF_8));
     }
 
-    //按块传输，可以多次调用
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf out = (ByteBuf) msg;
-        System.out.println("Client received : " + out.toString(CharsetUtil.UTF_8));
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+        log.info("客户端收到消息: {}", msg.toString(CharsetUtil.UTF_8));
     }
 
     @Override
