@@ -37,7 +37,7 @@ public class EchoClient {
             ChannelFuture channelFuture = bootstrap.connect().sync();// 连接远程节点，阻塞到完成
             channelFuture.channel().closeFuture().sync(); //阻塞获取closeFuture 直至关闭channel
         } finally {
-            eventLoopGroup.shutdownGracefully().sync();
+            eventLoopGroup.shutdownGracefully().sync(); //优雅停机
         }
     }
 
